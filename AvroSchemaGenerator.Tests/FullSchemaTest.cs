@@ -190,6 +190,12 @@ namespace AvroSchemaGenerator.Tests
             public RecTypeRequired Child { get; set; }
         }
 
+        class NestedSchema
+        {
+            public RecType Foo { get; set; }
+            public RecType Bar { get; set; }
+        }
+
         [Fact]
         public void TestRecType()
         {
@@ -205,6 +211,13 @@ namespace AvroSchemaGenerator.Tests
             var actual = typeof(RecTypeRequired).GetSchema();
             _output.WriteLine(actual);
             Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void NestedTypesProduceValidAvroSchema()
+        {
+            var schemaJson = typeof(NestedSchema).GetSchema();
+            var avroSchema = Avro.Schema.Parse(schemaJson);
         }
     }
 }
