@@ -218,6 +218,7 @@ namespace AvroSchemaGenerator.Tests
         {
             var schemaJson = typeof(NestedSchema).GetSchema();
             var avroSchema = Avro.Schema.Parse(schemaJson);
+            Assert.NotNull(avroSchema);
         }
     }
 }
